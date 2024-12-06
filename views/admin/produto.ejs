@@ -1,0 +1,103 @@
+<%- include("partials/head")%>
+
+<body>
+    <%- include("partials/header")%>
+
+    <main> <!--Início do conteúdo principal-->
+        <section class="mt-5"> <!--Início da primeira seção-->
+            <div class="container"> <!--Início do container-->
+                <table class="table table-bordered"> <!--Início da tabela-->
+                    <thead class="thead-dark"> <!--Início do head da tabela-->
+                        <tr>
+                            <th>ID</th>
+                            <th>Produto</th>
+                            <th>Descrição</th>
+                            <th>Valor</th>
+                            <th>Loja</th>
+                            <th>Funções</th>
+                        </tr>
+                    </thead> <!--Fim do head da tabela-->
+                    <% produtos.forEach(produto => { %>
+                    <tbody> <!--Início do corpo da tabela-->
+                        <tr>
+                            <td><%=produto.id %></td>
+                            <td><%=produto.nome %></td>
+                            <td><%=produto.descricao %></td>
+                            <td>R$<%=produto.valor.toFixed(2) %></td>
+                            <td><%=produto.loja.nome %></td>
+                            <td>
+                                <div class="d-flex">
+                                    <form action="/api/admin/produtos/<%=produto.id%>?_method=DELETE" method="post">
+                                        <button type="submit" class="btn btn-danger">DELETAR</button>
+                                    </form>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody> <!--Fim do corpo da tabela-->
+                    <% })%>
+                </table> <!--Fim da tabela-->
+                <a class="btn btn-success" onclick="exibirFormularioAdicionar()">Adicionar produto</a>
+            </div> <!--Fim do container-->
+        </section> <!--Fim da primeira seção-->
+
+        <section class="mt-5 mb-5"  style="display: none;" id="formularioAdicionarProduto"> <!--Início da segunda seção-->
+            <div class="container"> <!--Início do container-->
+                <div class="row"> <!--Início da linha-->
+                    <div class="col-md-8 mx-auto"> <!--Início da coluna-->
+                        <div class="card"> <!--Início do cartão-->
+                            <div class="card-header">
+                                <h2 class="text-center text-white">Adicionar produto</h2>
+                            </div>
+                            <div class="card-body"> <!--Início do corpo do cartão-->
+                                <form action="/api/admin/produtos" method="post" enctype="multipart/form-data"> <!--Início do formulário-->
+                                    <input type="text" name="nome" class="form-control mb-3" placeholder="Digite o nome do produto" required>
+                                    <textarea name="descricao" class="form-control mb-3" placeholder="Digite a descrição do produto" required></textarea>
+                                    <input type="number" name="valor" class="form-control mb-3" placeholder="Digite o valor do produto" required>
+                                    <select name="lojaId" class="form-control mb-3" required>
+                                        <option class="text-center" selected disabled>Selecione a loja do produto</option>
+                                        <%lojas.forEach(loja => { %> 
+                                            <option value="<%=loja.id%>"><%=loja.nome%></option>
+                                        <%})%>
+                                    </select>
+                                    <div class="custom-file mb-3">
+                                        <input type="file" class="custom-file-input" id="imagem1" name="imagem1" required>
+                                        <label class="custom-file-label" for="imagem1">Selecione a primeira imagem (obrigatória)</label>
+                                    </div>
+
+                                    <div class="custom-file mb-3">
+                                        <input type="file" class="custom-file-input" id="imagem2" name="imagem2">
+                                        <label class="custom-file-label" for="imagem2">Selecione a segunda imagem</label>
+                                    </div>
+                                    
+                                    <div class="custom-file mb-3">
+                                        <input type="file" class="custom-file-input" id="imagem3" name="imagem3">
+                                        <label class="custom-file-label" for="imagem3">Selecione a terceira imagem</label>
+                                    </div>
+                                    <button type="submit" class="btn btnForm w-100">Adicionar produto</button>
+                                </form> <!--Fim do formulário-->
+                            </div> <!--Fim do corpo do cartão-->
+                        </div> <!--Fim do cartão-->
+                    </div> <!--Fim da coluna-->
+                </div> <!--Fim da linha-->
+            </div> <!--Fim do container-->
+        </section> <!--Fim da segunda seção-->
+    </main> <!--Fim do conteúdo principal-->
+</body>
+
+<script>
+
+    // Permitindo que o nome do arquivo selecionado apareça ao lado do input ; 
+    document.querySelectorAll('.custom-file-input').forEach(input => {
+    input.addEventListener('change', function(e) {
+        let fileName = e.target.files[0].name;
+        let nextSibling = e.target.nextElementSibling;
+        nextSibling.innerText = fileName;
+    });
+});
+
+    function exibirFormularioAdicionar() { // Função para exibir o formulário de adicionar produto ; 
+            let formularioAdicionarProduto = document.getElementById("formularioAdicionarProduto"); // Recuperando o formulário adicionar produto ; 
+            formularioAdicionarProduto.style.display = "block"; // Alterando o estilo do formulário para ser exibido ao cliente ; 
+        }
+
+</script>

@@ -1,0 +1,100 @@
+<%- include("partials/head") %>
+
+<body>
+    <%- include("partials/header") %>
+
+    <main class="mt-5"> <!-- Início do conteúdo principal -->
+        
+        <!-- Seção de Endereço -->
+        <section>
+            <div class="container">
+                <div class="row align-items-center">
+                    <!-- Coluna do Mapa -->
+                    <div class="col-md-6 mb-4 mb-md-0">
+                        <iframe class="w-100 h-100" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3958.109244257486!2d-35.892999325735445!3d-7.228378970982844!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x7ac1e41265f1f09%3A0xc62d3b6021e72de5!2sVila%20do%20Artes%C3%A3o!5e0!3m2!1spt-BR!2sbr!4v1714399573331!5m2!1spt-BR!2sbr" 
+                            style="border:0;" 
+                            allowfullscreen="" 
+                            loading="lazy" 
+                            referrerpolicy="no-referrer-when-downgrade">
+                        </iframe>
+                    </div>
+                    <!-- Coluna do Endereço -->
+                    <div class="col-md-6">
+                        <h3>Endereço</h3>
+                        <p>
+                            Rua Almeida Barreto, S/N - São José, Campina Grande - Paraíba <br>
+                            CEP 58400-026 <br>
+                            Ponto de referência: Próximo ao Hospital Pedro I - Açude Velho - Parque do Povo
+                        </p>
+                    </div>
+                </div>
+                <hr>
+
+            </div>
+        </section>
+
+        <!-- Seção de Transporte Público -->
+        <section class="mt-5">
+            <div class="container">
+                <div class="row align-items-start">
+                    <!-- Coluna dos Ônibus -->
+                    <div class="col-md-6 mb-4 mb-md-0 d-flex flex-column">
+                        <h3>Transporte público</h3>
+                        <p>Lista de todos os ônibus que passam em frente à Vila do Artesão:</p>
+                        <div class="row">
+                            <!-- Primeira Coluna de Ônibus -->
+                            <div class="col-md-6">
+                                <ul>
+                                    <li>077</li>
+                                    <li>090A</li>
+                                    <li>090B</li>
+                                    <li>092</li>
+                                    <li>101</li>
+                                    <li>111</li>
+                                    <li>404</li>
+                                </ul>
+                            </div>
+                            <!-- Segunda Coluna de Ônibus -->
+                            <div class="col-md-6">
+                                <ul>
+                                    <li>444</li>
+                                    <li>900</li>
+                                    <li>902</li>
+                                    <li>092</li>
+                                    <li>909</li>
+                                    <li>922</li>
+                                    <li>044</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Coluna da Imagem do Ônibus -->
+                    <div class="col-md-6">
+                        <img src="/Imagens/Imagem de ônibus.jpeg" 
+                             alt="Imagem de pessoas embarcando em ônibus" 
+                             class="img-fluid rounded align-self-start">
+                    </div>
+                </div>
+                <hr>
+            </div>
+        </section>
+
+        <section class="mt-5 mb-4"> <!-- Início da terceira seção -->
+            <div class="container"> <!-- Início do container -->
+                <div class="row"> <!-- Início da linha -->
+                    <div class="col-md-4"> <!-- Início da primeira coluna -->
+                        <img src="/Imagens/Imagem da vila.jpg" alt="Imagem da vila do artesão" class="img-fluid rounded w-100" style="height: 300px; object-fit: cover;">
+                    </div> <!-- Fim da primeira coluna -->
+                    <div class="col-md-4"> <!-- Início da segunda coluna -->
+                        <img src="/Imagens/Imagem da vila 2.jpeg" alt="Imagem da vila do artesão" class="img-fluid rounded w-100" style="height: 300px; object-fit: cover;">
+                    </div> <!-- Fim da segunda coluna -->
+                    <div class="col-md-4"> <!-- Início da terceira coluna -->
+                        <img src="/Imagens/Imagem da vila 3.jpg" alt="Imagem da vila do artesão" class="img-fluid rounded w-100" style="height: 300px; object-fit: cover;">
+                    </div> <!-- Fim da terceira coluna -->
+                </div> <!-- Fim da linha -->
+            </div> <!-- Fim do container -->
+        </section> <!-- Fim da terceira seção -->
+        
+    </main> <!-- Fim do conteúdo principal -->
+</body>
+</html>

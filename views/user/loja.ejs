@@ -1,0 +1,35 @@
+<%- include("partials/head") %>
+
+<body>
+    <%- include("partials/header") %>
+
+    <main> <!--Início do conteúdo principal-->
+        <section class="mt-4"> <!--Início da seção principal-->
+            <div class="container"> <!--Início do container-->
+                <div class="row"> <!--Início da linha-->
+                    <% lojas.forEach(loja => { %>
+                        <div class="col-md-4 mb-4"> <!--Início da coluna-->
+                            <div class="card h-100 shadow-lg rounded-4"> <!--Início do card-->
+                                <div class="card-header rounded-top"> <!--Início do card-header -->
+                                    <h3 class="text-center text-white mb-0"> <%= loja.nome%> </h3>
+                                </div>
+                                <div class="card-body bg-light" style="height: 300px; overflow-y: auto;"> <!--Início do corpo do cartão-->
+                                    <p class="text-justify">
+                                        <strong>Descrição: </strong><%= loja.descricao%> <hr>
+                                        <strong>WhatsApp: </strong> <%= loja.whatsapp%> <hr>
+                                        <strong>Proprietário: </strong> <%= loja.administrador.nome %> <hr>
+                                    </p>
+                                </div> <!--Fim do corpo do cartão-->
+                                <div class="card-footer rounded-bottom"> <!--Início do footer do cartão-->
+                                    <a href="/api/user/lojas/<%=loja.nome%>" class="btn text-white btn-outline-secondary w-100 rounded-pill">Ver produtos da loja</a> 
+                                </div> <!--Fim do footer do cartão-->
+                            </div> <!--Fim do card-->
+                        </div> <!--Fim da coluna-->
+                    <%})%>
+                </div> <!--Fim da linha-->
+            </div> <!--Fim do container-->
+        </section> <!--Fim da seção principal-->
+    </main> <!--Fim do conteúdo principal-->
+
+</body>
+</html>

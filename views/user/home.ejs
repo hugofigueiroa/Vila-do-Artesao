@@ -1,0 +1,79 @@
+<%- include("partials/head") %>
+
+<body>
+    <%- include("partials/header") %>
+
+    <main > <!--Início do conteúdo principal-->
+
+        <section class="mt-5"> <!--Início da primeira seção-->
+            <div class="container"> <!--Início do container-->
+                <div class="row no-gutters d-flex align-items-stretch"> <!--Início da linha-->
+                    <div class="col-md-6 d-flex"> <!--Início da primeira coluna-->
+                        <img src="/Imagens/Imagem da vila - home 1.jpg" alt="Imagem da vila do artesão" class="img-fluid rounded w-100 imgHome"> 
+                    </div> <!--Fim da primeira coluna-->
+                    <div class="col-md-6 pl-3"> <!--Início da segunda coluna-->
+                        <h2 class="text-center titulo">História</h2>
+                        <p class="text-justify">
+                            A Vila do Artesão em Campina Grande, na Paraíba, é um espaço cultural que se destaca pela preservação e valorização das tradições artesanais da região. Sua história remonta ao final da década de 1970, quando o então prefeito da cidade, Ronaldo Cunha Lima, idealizou um local onde os artesãos pudessem expor e comercializar suas obras.
+                        </p>
+                        <p class="text-justify">
+                            A construção da Vila do Artesão teve início em 1979, e ela foi inaugurada oficialmente em 1980, como parte das comemorações do São João daquele ano. Localizada no bairro do São José, a Vila do Artesão foi concebida como um espaço para promover o artesanato local, além de proporcionar um ambiente de convívio e intercâmbio cultural entre os artesãos e visitantes.
+                        </p>
+                    </div> <!--Fim da segunda coluna-->
+                </div> <!--Fim da linha-->
+                <hr>
+            </div> <!--Fim do container-->
+        </section> <!--Fim da primeira seção-->
+
+
+        <section> <!--Início da segunda seção-->
+            <div class="container"> <!--Início do container-->
+                <div class="row"> <!--Início da linha-->
+                    <div class="col-md-6"> <!--Início da primeira coluna-->
+                        <h2 class="text-center titulo">Eventos</h2>
+                        <p class="text-justify">
+                            • <strong>Feiras de Artesanato:</strong> A Vila do Artesão realiza feiras periódicas onde os artesãos locais têm a oportunidade de expor e vender seus produtos. Essas feiras costumam atrair tanto moradores locais quanto turistas interessados em adquirir artesanatos típicos da região.
+                        </p>
+                        <p class="text-justify">
+                            • <strong>Apresentações Culturais: </strong> O espaço promove apresentações de música, dança e teatro, destacando a rica cultura popular nordestina. Essas apresentações geralmente ocorrem durante eventos especiais ou em datas comemorativas.
+                        </p>
+                        <p class="text-justify">
+                            • <strong>Oficinas e Workshops:</strong> A Vila do Artesão oferece oficinas e workshops onde os visitantes podem aprender técnicas tradicionais de artesanato, como crochê, bordado, cerâmica, entre outros. Essas atividades proporcionam uma oportunidade para os interessados ​​em aprender mais sobre as habilidades artesanais locais.
+                        </p>
+                    </div> <!--Fim da primeira coluna-->
+                    <div class="col-md-6"> <!--Início da segunda coluna-->
+                        <img src="/Imagens/Imagem da vila - home 2.jpg" alt="Imagem da vila do artesão" class="img-fluid h-100 w-100 rounded">
+                    </div> <!--Fim da segunda coluna-->
+                </div> <!--Fim da linha-->
+                <hr>
+            </div> <!--Fim do container-->
+
+        </section> <!--Fim da segunda seção-->
+        
+
+        <section class="mt-5 mb-3"> <!--Início da terceira seção-->
+            <div class="container"> <!--Início do container-->
+                <h2 class="text-center titulo">Principais Lojas</h2>
+                <div class="row"> <!--Início da linha-->
+                    <%lojas.forEach(loja => {%>
+                        <div class="col-md-4"> <!--Início da coluna-->
+                            <div class="card h-100 shadow-lg rounded-4"> <!--Início do card-->
+                                <div class="card-header rounded-top"> <!--Início do cabeçalho do cartão-->
+                                    <h3 class="text-center text-white mb-0"><%= loja.nome %></h3>
+                                </div> <!--Fim do cabeçalho do cartão-->
+                                <div class="card-body bg-light" style="height: 200px; overflow-y: auto;"> <!--Início do corpo do cartão-->
+                                    <p class="text-justify">
+                                        <%= loja.descricao %>
+                                    </p>
+                                </div> <!--Fim do corpo do cartão-->
+                                <div class="card-footer rounded-bottom"> <!--Início do footer do cartão -->
+                                    <a href="/api/user/lojas/<%=loja.nome%>" class="btn text-white btn-outline-secondary w-100 rounded-pill">Ver produtos</a> 
+                                </div> <!--Fim do footer do cartão -->
+                            </div> <!--Fim do card-->
+                        </div> <!--Fim da coluna-->
+                    <%})%>
+                </div> <!--Fim da linha-->
+            </div> <!--Fim do container-->
+        </section> <!--Fim da terceira seção-->
+    </main> <!--Fim do conteúdo principal-->
+</body>

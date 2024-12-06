@@ -1,0 +1,10 @@
+<!-- Mensagens de Sucesso e Erro -->
+<% if (successMessage || errorMessage) { %>
+    <div class="alert <%= successMessage ? 'alert-success' : 'alert-danger' %>">
+        <strong><%= successMessage ? 'Sucesso!' : 'Erro!' %></strong>
+        <%= successMessage || errorMessage %>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+<% } %>

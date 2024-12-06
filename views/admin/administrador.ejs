@@ -1,0 +1,120 @@
+<%- include("partials/head")%>
+
+<body>
+    <%- include("partials/header")%>
+
+    <main class="mt-5"> <!--Início do conteúdo principal--> 
+        <section> <!--Início da primeira seção-->
+            <div class="container"> <!--Início do container da primeira seção-->
+
+                <%- include("partials/message")%>
+
+                <table class="table table-bordered"> <!--Início da tabela-->
+                    <thead class="thead-dark"> <!--Início do head da tabela-->
+                        <tr>
+                            <th>ID</th>
+                            <th>Nome</th>
+                            <th>Email</th>
+                            <th>Funções</th>
+                        </tr>
+                    </thead> <!--Fim do head da tabela-->
+
+                    <% administradores.forEach(administrador => { %>
+                    <tbody> <!--Início do corpo da tabela-->
+                        <tr>
+                            <td><%=administrador.id%></td>
+                            <td><%=administrador.nome%></td>
+                            <td><%=administrador.email%></td>
+                            <td>
+                                <div class="d-flex">
+                                    <form action="/api/admin/administradores/<%=administrador.id%>?_method=DELETE" method="post" onsubmit="confirmarDelecao(event, this)">
+                                        <button type="submit" class="btn btn-danger">Deletar</button>
+                                    </form>
+                                    <button class="btn btn-warning ml-2" onclick="exibirFormularioEditar('<%= administrador.id %>', '<%= administrador.nome %>', '<%= administrador.email %>')">Editar</button>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody> <!--Fim do corpo da tabela-->
+                    <%})%>
+                </table> <!--Fim da tabela-->
+                <a class="btn btn-success mb-3" onclick="exibirFormularioAdicionar()">Adicionar administrador</a>
+
+            </div> <!--Fim do container da primeira seção-->
+        </section> <!--Fim da primeira seção-->
+
+        <section class="mt-5 mb-5" style="display: none;" id="formularioAdicionarAdministrador"> <!--Início da segunda seção-->
+            <div class="container"> <!--Início do container da segunda seção-->
+                <div class="row"> <!--Início da linha-->
+                    <div class="col-md-8 mx-auto"> <!--Início da coluna-->
+                        <div class="card"> <!--Início do card-->
+                            <div class="card-header"> <!--Início do card-header -->
+                                <h3 class="text-center text-white">Adicionar administrador</h3>
+                            </div> <!--Fim do card-header -->
+                            <div class="card-body"> <!--Início do card-body-->
+                                <form action="/api/admin/administradores" method="post">
+                                    <input type="text" name="nome" id="nome" class="form-control mb-3" required placeholder="Digite o nome do administrador">
+                                    <input type="email" name="email" id="email" class="form-control mb-3" required placeholder="Digite o e-mail do administrador">
+                                    <input type="password" name="senha" id="senha" class="form-control mb-3" required placeholder="Digite a senha do administrador">
+                                    <button type="submit" class="btn btnForm w-100">Adicionar</button>
+                                </form>
+                            </div> <!--Fim do card-body-->
+                        </div> <!--Fim do card-->
+                    </div> <!--Fim da coluna-->
+                </div> <!--Fim da linha-->
+            </div> <!--Fim do container da segunda seção-->
+        </section> <!--Fim da segunda seção-->
+
+        <section class="mt-5 mb-5" id="formularioEditarAdministrador" style="display: none;"> <!--Início da terceira seção-->
+            <div class="container"> <!--Início do container da terceira seção-->
+                <div class="row"> <!--Início da linha-->
+                    <div class="col-md-8 mx-auto"> <!--Início da coluna-->
+                        <div class="card"> <!--Início do card-->
+                            <div class="card-header"> <!--Início do cabeçalho do cartão-->
+                                <h3 class="text-center text-white">Atualizar administrador</h3>
+                            </div> <!--Fim do cabeçalho do cartão-->
+                            <div class="card-body"> <!--Início do corpo do cartão-->
+                                <form action="/api/admin/administradores?_method=PUT" method="post" id="formEditarAdm"> <!--Início do formulário-->
+                                    <input type="hidden" name="id" id="editarId">
+                                    <input type="text" name="nome" placeholder="Digite o nome do administrador" required id="editarNome" class="form-control mb-3">
+                                    <input type="email" name="email" placeholder="Digite o e-mail do administrador" required id="editarEmail" class="form-control mb-3">
+                                    <button type="submit" class="btn btnForm w-100">Editar</button>
+                                </form> <!--Fim do formulário-->
+                            </div> <!--Fim do corpo do cartão-->
+                        </div> <!--Fim do card-->
+                    </div> <!--Fim da coluna-->
+                </div> <!--Fim da linha-->
+            </div> <!--Fim do container da terceira seção-->
+        </section> <!--Fim da terceira seção-->
+    </main> <!--Fim do conteúdo principal-->
+</body>
+</html>
+
+<script>
+
+      function exibirFormularioAdicionar() { // Função criada para exibir o formulário de adicionar administrador ; 
+            let formularioAdicionarCategoria = document.getElementById("formularioAdicionarAdministrador"); // Recuperando o formulário adicionar administrador; 
+            let formularioEditarCategoria = document.getElementById("formularioEditarAdministrador"); // Recuperando o formulário de etrat administrador ;
+            formularioEditarCategoria.style.display = "none" ; // Alternando o estilo do formulário para ser ocultado ; 
+            formularioAdicionarCategoria.style.display = "block"; // Alterando o estilo do formulário para ser exibido ao cliente ;
+        }
+
+        function exibirFormularioEditar(id, nome, email) {
+            let formularioAdicionarCategoria = document.getElementById("formularioAdicionarAdministrador"); // Recuperando o formulário pelo ID ; 
+            let formularioEditarCategoria = document.getElementById("formularioEditarAdministrador"); // Recuperando o formulário pelo ID ;
+            formularioAdicionarCategoria.style.display = "none"; // Alterando o estilo do formulário para ser exibido ao cliente ;
+            formularioEditarCategoria.style.display = "block" ; // Alternando o estilo do formulário para ser ocultado ; 
+
+            document.getElementById("editarId").value = id; // Preenche o ID
+            document.getElementById("editarNome").value = nome; // Preenche o nome
+            document.getElementById("editarEmail").value = email; // Preenche o email
+        }
+
+        function confirmarDelecao(event, form) {
+            event.preventDefault(); // Impede do formulário ser enviado ; 
+            let confirmacao = confirm("Deseja realmente deletar o administrador? As lojas vinculadas a esse administrador também será excluídas"); // Mensagem para verificar se o usuário realmente deseja remover o administrador no banco de dados; 
+            if(confirmacao){ // Caso o usuário deseje remover o administrador ;
+                form.submit(); // Enviando o formulário ;
+            }
+        }
+
+</script>

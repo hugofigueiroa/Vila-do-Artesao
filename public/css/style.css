@@ -1,0 +1,35 @@
+/* ESTILIZAÇÃO CUSTOMIZADA */
+
+header .navbar { /* ESTILIZAÇÃO DO CABEÇALHO */
+    background-color: #a67b5b; /* COR DE FUNDO DO CABEÇALHO */
+}
+
+body { /* ESTILIZAÇÃO DO CORPO */
+    background-color: #FFF8E7; /* COR DE FUNDO DO BODY */
+}
+
+.card .card-header { /* ESTILIZAÇÃO DO CABEÇALHO DO CARD */
+    background-color: #a67b5b; /* COR DE FUNDO DO CARD-HEADER */
+
+}
+
+.card .card-footer { /* ESTILIZAÇÃO DO FOOTER DO CARD */
+    background-color: #a67b5b; /* COR DE FUNDO DO CARD-FOOTER */
+}
+
+.btnForm { /* ESTILIZAÇÃO DO BOTÃO DE ADICIONAR DOS FORMULÁRIOS */
+    background-color: #a67b5b; /* COR DE FUNDO DO CARD-HEADER */
+    color: white; /* COR DO TEXTO */
+}
+
+.titulo { /* ESTILIZAÇÃO DO H2 */
+    color: #a67b5b; /* COR DO TEXTO */
+}
+
+.imgHome { /* ESTILIZAÇÃO DA IMAGEM NA TELA DE HOME DO USUÁRIO */
+    height: 305px; /* DEFININDO O TAMANHO FIXO DA IMAGEM */
+}
+
+.navbar-nav .nav-link { /* ESTILIZAÇÃO DO CONTEÚDO DA NAVEGAÇÃO */
+    font-size: 18px; /* DEFININDO COMO 18PX */
+}

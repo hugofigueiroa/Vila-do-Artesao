@@ -1,0 +1,153 @@
+<%- include("partials/head") %>
+
+    <body>
+
+        <%- include("partials/header") %>
+
+            <main class="mt-5"> <!--Início do conteúdo principal da página-->
+                <section> <!--Início da primeira seção-->
+                    <div class="container"> <!--Início do container-->
+
+                        <%- include("partials/message") %>
+
+                            <table class="table table-bordered"> <!--Início da tabela-->
+                                <thead class="thead-dark"> <!--Início do head da tabela-->
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Nome</th>
+                                        <th>Descrição</th>
+                                        <th>WhatsApp</th>
+                                        <th>Proprietário</th>
+                                        <th>Funções</th>
+                                    </tr>
+                                </thead> <!--Fim do head da tabela-->
+                                <tbody> <!-- Início do corpo da tabela -->
+                                    <% lojas.forEach(loja=> { %>
+                                        <tr>
+                                            <td>
+                                                <%= loja.id %>
+                                            </td>
+                                            <td>
+                                                <%= loja.nome %>
+                                            </td>
+                                            <td>
+                                                <%= loja.descricao %>
+                                            </td>
+                                            <td>
+                                                <%= loja.whatsapp %>
+                                            </td>
+
+                                            <td>
+                                                <%= loja.administrador.nome %>
+                                            </td> 
+                                            <td>
+                                                <div class="d-flex">
+                                                    <form action="/api/admin/lojas/<%= loja.id %>?_method=DELETE"
+                                                        method="post" onsubmit="confirmarDelecao(event, this)">
+                                                        <button type="submit" class="btn btn-danger">Excluir</button>
+                                                    </form>
+                                                    <a class="btn btn-warning ml-3"
+                                                        onclick="exibirFormularioEditar('<%=loja.id%>', '<%=loja.nome%>', '<%=loja.descricao%>', '<%=loja.whatsapp%>', '<%=loja.administrador.nome%>',)">Editar</a>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <% }) %>
+                                </tbody> <!-- Fim do corpo da tabela -->
+                            </table> <!--Fim da tabela-->
+                            <a class="btn btn-success mb-4" onclick="exibirFormularioAdicionar()">Adicionar loja</a>
+                    </div> <!--Fim do container-->
+                </section> <!--Fim da primeira seção-->
+
+                <section class="mt-3 mb-5" style="display: none;" id="formularioAdicionarLoja">
+                    <!--Início da segunda seção-->
+                    <div class="container"> <!--Início do container-->
+                        <div class="row"> <!--Início da linha-->
+                            <div class="col-md-8 mx-auto"> <!--Início da coluna-->
+                                <div class="card"> <!--Início do card-->
+                                    <div class="card-header"> <!--Início do card-header -->
+                                        <h3 class="text-center text-white">Adicionar loja</h3>
+                                    </div> <!--Fim do card-header -->
+                                    <div class="card-body"> <!--Início do corpo do cartão-->
+                                        <form action="/api/admin/lojas" method="post"> <!--Início do formulário-->
+                                            <input type="text" name="nome" class="form-control mb-3"
+                                                placeholder="Digite o nome da loja" required>
+                                            <textarea name="descricao" class="form-control mb-3"
+                                                placeholder="Digite a descrição da loja" required></textarea>
+                                            <input type="number" name="whatsapp" class="form-control mb-3"
+                                                placeholder="Digite o WhatsApp da loja" required>
+                                            <select name="proprietario" class="form-control mb-3" required>
+                                                <option class="text-center" disabled selected>Selecione o proprietário
+                                                    da loja</option>
+                                                <% administradores.forEach(adm=> { %>
+                                                    <option value="<%= adm.id %>">
+                                                        <%= adm.nome %>
+                                                    </option>
+                                                    <% }) %>
+                                            </select>
+                                            <button type="submit" class="btn btnForm w-100">Adicionar loja</button>
+                                        </form> <!--Fim do formulário-->
+                                    </div> <!--Fim do corpo do cartão-->
+                                </div> <!--Fim do card-->
+                            </div> <!--Fim da coluna-->
+                        </div> <!--Fim da linha-->
+                    </div> <!--Fim do container-->
+                </section> <!--Fim da segunda seção-->
+
+                <section class="mt-5 mb-5" id="formularioEditarLoja" style="display: none;">
+                    <!--Início da terceira seção-->
+                    <div class="container"> <!--Início do container-->
+                        <div class="row"> <!--Início da linha-->
+                            <div class="col-md-8 mx-auto"> <!--Início da coluna-->
+                                <div class="card"> <!--Início do card-->
+                                    <div class="card-header"> <!--Início do card-header-->
+                                        <h3 class="text-center text-white">Editar loja</h3>
+                                    </div> <!--Fim do card-header-->
+                                    <div class="card-body"> <!--Início do card-body-->
+                                        <form action="/api/admin/lojas?_method=PUT" method="post">
+                                            <!--Início do formulário-->
+                                            <input type="hidden" name="id" id="editarId">
+                                            <input type="text" name="nome" placeholder="Digite o nome da loja" class="form-control mb-3" required id="editarNome">
+                                            <textarea name="descricao" id="editarDescricao" class="form-control mb-3" required placeholder="Digite a descrição da categoria"></textarea>
+                                            <input type="number" name="whatsapp" class="form-control mb-3" placeholder="Digite o WhatsApp da loja" required id="editarwhatsapp">
+                                            <button type="submit" class="btn btnForm w-100">Editar Loja</button>
+                                        </form> <!--Fim do formulário-->
+                                    </div> <!--Fim do card-body-->
+                                </div> <!--Fim do card-->
+                            </div> <!--Fim da coluna-->
+                        </div> <!--Fim da linha-->
+                    </div> <!--Fim do container-->
+                </section> <!--Fim da terceira seção-->
+            </main> <!--Fim do conteúdo principal da página-->
+
+    </body>
+
+    </html>
+
+    <script>
+        function confirmarDelecao(event, form) { // Função para confirmar a exclusão da loja ; 
+            event.preventDefault(); // Impede do formulário ser enviado ; 
+            let confirmacao = confirm("Deseja realmente deletar a loja?"); // Mensagem para verificar se o usuário realmente deseja remover a loja do banco de dados ; 
+            if (confirmacao) { // Caso o usuário deseje remover a loja ; 
+                form.submit(); // Enviando o formulário ; 
+            }
+        }
+
+        function exibirFormularioAdicionar() { // Função para exibir o formulário de adicionar loja ; 
+            let formularioAdicionarLoja = document.getElementById("formularioAdicionarLoja"); // Recuperando o formulário adicionar loja ; 
+            let formularioEditarLoja = document.getElementById("formularioEditarLoja"); // Recuperando o formulário de editar loja ; 
+            formularioEditarLoja.style.display = "none"; // Alternando o estilo do formulário para não ser mais exibido ao cliente ; 
+            formularioAdicionarLoja.style.display = "block"; // Alterando o estilo do formulário para ser exibido ao cliente ; 
+        }
+
+        function exibirFormularioEditar(id, nome, descricao, whatsapp, proprietario) {
+            let formularioAdicionarLoja = document.getElementById("formularioAdicionarLoja"); // Recuperando o formulário adicionar loja ; 
+            let formularioEditarLoja = document.getElementById("formularioEditarLoja"); // Recuperando o formulário de editar loja ; 
+            formularioAdicionarLoja.style.display = "none"; // Alterando o estilo do formulário para ser exibido ao cliente ;     }
+            formularioEditarLoja.style.display = "block"; // Alternando o estilo do formulário para não ser mais exibido ao cliente ; 
+
+            document.getElementById("editarId").value = id; // Preenchendo o ID ; 
+            document.getElementById("editarNome").value = nome; // Preenche o nome ;
+            document.getElementById("editarDescricao").value = descricao; // Preenche a descrição; 
+            document.getElementById("editarwhatsapp").value = whatsapp; // Preenche o WhatsApp ; 
+        }
+    </script>
